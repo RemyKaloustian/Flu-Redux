@@ -11,20 +11,13 @@ package app;
  */
 public abstract class LivingBeing 
 {
-    //The different states a living being can represent
-    static final String healthy = "Healthy";
-    static final String sick = "Sick";
-    static final String recovering = "Recovering";
-    static final String dead = "Dead";  
-    static final String contagious = "Contagious";
-    
+    States state;
+
     protected char speciesCode;
-    
-    protected String state ; //the state of a living being
-    
+
     public LivingBeing()
     {
-        this.state = LivingBeing.contagious;
+        this.state = States.Contagious;
         this.speciesCode = this.getClass().getSimpleName().charAt(0);
     }
     
@@ -32,19 +25,19 @@ public abstract class LivingBeing
     {
         String toReturn = "";
         
-        if(this.state.equals(LivingBeing.healthy))
+        if(this.state.equals(States.Healthy))
             toReturn += Simulation.ANSI_GREEN + "H" ;
         
-        else if(this.state.equals(LivingBeing.sick))
+        else if(this.state.equals(States.Sick))
             toReturn +=Simulation.ANSI_PURPLE +  "S"  ;
         
-        else if(this.state.equals(LivingBeing.recovering))
+        else if(this.state.equals(States.Recovering))
             toReturn += Simulation.ANSI_BLUE + "R"  ;
         
-        else if(this.state.equals(LivingBeing.contagious))
+        else if(this.state.equals(States.Contagious))
             toReturn += Simulation.ANSI_YELLOW + "C";
         
-        else if(this.state.equals(LivingBeing.dead))
+        else if(this.state.equals(States.Dead))
             toReturn += Simulation.ANSI_RED + "D" ;
         
         
