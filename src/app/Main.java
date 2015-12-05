@@ -5,6 +5,9 @@
  */
 package app;
 
+import app.view.graphs.GridView;
+
+
 /**
  *
  * @author Rémy Kaloustian
@@ -15,6 +18,8 @@ public class Main
     public static void main(String args[])
     {
         Simulation simu = new Simulation();
+        
+        GridView view = new GridView(5,3);
         
     }//main()
     
