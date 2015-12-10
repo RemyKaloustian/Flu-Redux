@@ -11,12 +11,15 @@ import app.view.graphs.GridView;
 /**
  *
  * @author Rémy Kaloustian
+ * @author Abdelkarim Andolerzak
  */
 public class Main
 {
     
     public static void main(String args[])
     {
+
+        //TODO: Appel futur de la vue.
         Simulation simu = new Simulation();
         
         GridView view = new GridView(5,3);
