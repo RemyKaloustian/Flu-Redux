@@ -19,10 +19,12 @@ public class Simulator {
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    // The probability that a human will be created in any given grid position.
+    private static final double HUMAN_CREATION_PROBABILITY = 0.02;
+    // The probability that a pig will be created in any given grid position.
+    private static final double PIG_CREATION_PROBABILITY = 0.08;
+    //The probability that a duck will be created in any given grid position
+    private static final double DUCK_CREATION_PROBABILITY = 0.03;
 
     // List of animals in the field.
     private List<Animal> animals;
