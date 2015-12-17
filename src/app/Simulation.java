@@ -13,18 +13,6 @@ import java.util.Scanner;
  */
 public class Simulation 
 {
-    
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-    
-    
     private Grid grid;
     
     private int humans, pigs, ducks, chickens;
@@ -42,7 +30,6 @@ public class Simulation
     
     public void simulate()
     {
-        this.printTitle();
         this.printWelcome();
         
         int size = this.enterGridSize();
@@ -64,17 +51,7 @@ public class Simulation
         
         
     }//simulate()
-    
-    public void printTitle()
-    {
-        System.out.println(Simulation.ANSI_PURPLE + "/********************************************************************/ \n"
-                +     Simulation.ANSI_PURPLE   +  "/********************************************************************/ \n"
-                +     Simulation.ANSI_PURPLE  +   "/********************************************************************/ \n"
-                +      Simulation.ANSI_PURPLE  +  "/                       THE FLU SIMULATOR                            / \n"
-                +      Simulation.ANSI_PURPLE  +  "/********************************************************************/ \n"
-                +      Simulation.ANSI_PURPLE  +  "/********************************************************************/ \n"
-                +      Simulation.ANSI_PURPLE  +  "/********************************************************************/ \n " + Simulation.ANSI_RESET);
-    }//printTitle()
+
     
     public void printWelcome()
     {

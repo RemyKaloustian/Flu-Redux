@@ -6,7 +6,7 @@ package app;
  */
 public class H1N1 extends Virus {
     public H1N1() {
-        super();
+        super(0.3f,1,2,0.5f);
 
     }
 }
