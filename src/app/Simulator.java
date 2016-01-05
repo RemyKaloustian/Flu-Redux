@@ -115,8 +115,6 @@ public class Simulator {
      */
     public void simulateOneStep() {
         step++;
-
-
         // Provide space for newborn humans.
         for (Iterator<LivingBeing> it = livings.iterator(); it.hasNext();) {
             LivingBeing living = it.next();
@@ -131,8 +129,6 @@ public class Simulator {
                 living.beInfected();
             }
         }
-
-
 
         view.showStatus(step, field);
     }
@@ -161,21 +157,21 @@ public class Simulator {
                 if (rand.nextDouble() <= HUMAN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Human human = new Human(false,location,field);
-                    humans.add(human);
+                    livings.add(human);
                 } else if (rand.nextDouble() <= DUCK_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Duck duck = new Duck(location,field);
-                    ducks.add(duck);
+                    livings.add(duck);
                 }
                 else if (rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Chicken chicken = new Chicken(location,field);
-                    chickens.add(chicken);
+                    livings.add(chicken);
                 }
                 else if (rand.nextDouble() <= PIG_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Pig pig = new Pig(location,field);
-                    pigs.add(pig);
+                    livings.add(pig);
                 }
                 // else leave the location empty.
             }
