@@ -1,6 +1,6 @@
 package app.view;
 
-import app.*;
+import app.People.*;
 
 import java.awt.*;
 import java.util.ArrayList;

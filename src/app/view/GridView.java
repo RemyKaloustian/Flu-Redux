@@ -1,7 +1,5 @@
 package app.view;
 
-import app.Field;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashMap;

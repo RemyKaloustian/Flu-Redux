@@ -1,7 +1,5 @@
 package app.view;
 
-import app.Field;
-
 import java.util.HashMap;
 
 /**

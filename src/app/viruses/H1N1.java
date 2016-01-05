@@ -1,4 +1,6 @@
-package app;
+package app.viruses;
+
+import app.viruses.Virus;
 
 /**
  * @author : Karim

@@ -1,6 +1,4 @@
-package app;
-
-import app.view.Location;
+package app.view;
 
 import java.util.Collections;
 import java.util.LinkedList;

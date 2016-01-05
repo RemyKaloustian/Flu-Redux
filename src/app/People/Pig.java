@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app;
+package app.People;
 
+import app.view.Field;
 import app.view.Location;
+import app.view.Randomizer;
+import app.view.States;
+import app.viruses.H1N1;
 
 import java.util.Random;
 
