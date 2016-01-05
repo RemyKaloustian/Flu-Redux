@@ -5,6 +5,8 @@
  */
 package app;
 
+import app.view.Location;
+
 import java.util.Random;
 
 /**
@@ -14,15 +16,16 @@ public class Pig extends LivingBeing {
     public Pig(Location location, Field f) {
         super(location, f);
         Random rand = new Random();
-        if (rand.nextDouble() <= 0.80) {
+        //Probability to be sick in the beggining
+        if(rand.nextDouble()<=0.50) {
             this.virus = new H1N1();
-            this.state = States.Sick;
+            this.state = States.SICK;
         }
     }
 
     @Override
     public void act() {
-        if (this.getState() == States.Sick) {
+        if (this.getState() == States.SICK) {
             updateDaysInfected();
             becomeContagious();
             beCured();
@@ -30,9 +33,12 @@ public class Pig extends LivingBeing {
         }
 
     }
-//    @Override
-//    public String toString()
-//    {
-//        return this.state + "_P";
-//    }
+
+    public void beCured() {
+        if (daysInfected >= new H1N1().getRecoveringTimeSpan()) {
+            Random rand = Randomizer.getRandom();
+            if (rand.nextDouble() >= new H1N1().getMortalityRate())
+                setDead();
+        }
+    }
 }//class Pig

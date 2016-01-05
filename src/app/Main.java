@@ -5,6 +5,8 @@
  */
 package app;
 
+import app.view.Simulator;
+
 /**
  *
  * @author Rémy Kaloustian

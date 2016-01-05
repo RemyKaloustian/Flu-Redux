@@ -1,4 +1,6 @@
-package app;
+package app.view;
+
+import app.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.Random;
  * humans and chickens.
  *
  * @author David J. Barnes and Michael Kölling
+ * @author Abdelkarim Andolerzak
  * @version 2011.07.31
  */
 public class Simulator {
@@ -118,7 +121,7 @@ public class Simulator {
         for (Iterator<LivingBeing> it = livings.iterator(); it.hasNext(); ) {
             LivingBeing living = it.next();
             living.act();
-            if (living.getState()==States.Dead) {
+            if (living.getState()==States.DEAD) {
                 it.remove();
             }
         }

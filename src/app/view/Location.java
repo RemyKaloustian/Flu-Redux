@@ -1,4 +1,4 @@
-package app;
+package app.view;
 
 /**
  * Represent a location in a rectangular grid.

@@ -5,14 +5,12 @@ package app;
  * @date :  03/12/2015.
  */
 public enum States {
-    Healthy,
-    Sick,
-    Recovering,
-    Dead,
-    Contagious;
+    HEALTHY,
+    SICK,
+    RECOVERING,
+    DEAD,
+    CONTAGIOUS;
 
-    private States() {
-    }
 
     public String toString(){
         return this.name();

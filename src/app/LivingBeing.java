@@ -6,6 +6,8 @@
 package app;
 
 
+import app.view.Location;
+
 import java.util.Random;
 
 /**
@@ -27,7 +29,7 @@ public abstract class LivingBeing {
     }
 
     public LivingBeing(Location loc, Field f) {
-        this.state = States.Healthy;
+        this.state = States.HEALTHY;
         this.speciesCode = this.getClass().getSimpleName().charAt(0);
         field = f;
         this.daysInfected = 0;
@@ -38,13 +40,13 @@ public abstract class LivingBeing {
     public void beInfected() {
         Random rand = Randomizer.getRandom();
         if (rand.nextDouble() >= new H1N1().getInfectionRate()) {
-            this.state = States.Sick;
+            this.state = States.SICK;
             this.virus = new H1N1();
         }
     }
 
     public boolean isInfected() {
-        return state == States.Sick;
+        return state == States.SICK;
     }
 
     public void updateDaysInfected() {
@@ -53,16 +55,16 @@ public abstract class LivingBeing {
 
     public void becomeContagious() {
         if (daysInfected >= new H1N1().getInfectionTimeSpan())
-            state = States.Contagious;
+            state = States.CONTAGIOUS;
     }
 
     public void beCured() {
         if (daysInfected >= new H1N1().getRecoveringTimeSpan()) {
             Random rand = Randomizer.getRandom();
             if (rand.nextDouble() >= new H1N1().getMortalityRate())
-                state = States.Dead;
+                setDead();
             else
-                state = States.Healthy;
+                state = States.HEALTHY;
         }
     }
 
@@ -70,19 +72,19 @@ public abstract class LivingBeing {
     public String toString() {
         String toReturn = "";
 
-        if (this.state.equals(States.Healthy))
+        if (this.state.equals(States.HEALTHY))
             toReturn += "H";
 
-        else if (this.state.equals(States.Sick))
+        else if (this.state.equals(States.SICK))
             toReturn += "S";
 
-        else if (this.state.equals(States.Recovering))
+        else if (this.state.equals(States.RECOVERING))
             toReturn += "R";
 
-        else if (this.state.equals(States.Contagious))
+        else if (this.state.equals(States.CONTAGIOUS))
             toReturn += "C";
 
-        else if (this.state.equals(States.Dead))
+        else if (this.state.equals(States.DEAD))
             toReturn += "D";
 
 
@@ -94,6 +96,18 @@ public abstract class LivingBeing {
             field.clear(location);
         this.location = location;
         field.place(this, location);
+    }
+
+    /**
+     * @author David J. Barnes and Michael KÃ¶lling
+     */
+    public void setDead() {
+        this.state = States.DEAD;
+        if (location != null) {
+            field.clear(location);
+            location = null;
+            field = null;
+        }
     }
 
     public Location getLocation() {

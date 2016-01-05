@@ -1,4 +1,6 @@
-package app;
+package app.view;
+
+import app.Field;
 
 import java.awt.Color;
 
