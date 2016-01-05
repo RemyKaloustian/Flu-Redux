@@ -102,6 +102,10 @@ public class Simulator {
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
+            try {
+                view.showStatus(step, field);
+                Thread.sleep(1000);
+            }catch (Exception e){}
         }
     }
 
@@ -119,6 +123,12 @@ public class Simulator {
             living.act();
             if (living.getState().name().equalsIgnoreCase("Dead")) {
                 it.remove();
+            }
+            else if (living.getState().name().equalsIgnoreCase("Sick")){
+                living.updateDaysInfected();
+            }
+            else{
+                living.beInfected();
             }
         }
 

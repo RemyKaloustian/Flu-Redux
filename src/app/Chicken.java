@@ -16,8 +16,13 @@ public class Chicken extends LivingBeing
         super(location,field);
         //this.speciesCode = this.getClass().getSimpleName();
     }//Chicken()
-   
-//    @Override
+
+    @Override
+    public void act() {
+
+    }
+
+    //    @Override
 //    public String toString()
 //    {
 //        return this.state + "_C";

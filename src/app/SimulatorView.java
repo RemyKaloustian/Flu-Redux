@@ -107,7 +107,10 @@ public class SimulatorView extends JFrame {
                 Object animal = field.getObjectAt(row, col);
                 if (animal != null) {
                     stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+                    if(((LivingBeing)animal).getState().equals(States.Sick))
+                        fieldView.drawMark(col, row, Color.green);
+                    else
+                        fieldView.drawMark(col, row, getColor(animal.getClass()));
                 } else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
                 }

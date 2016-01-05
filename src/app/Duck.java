@@ -13,6 +13,11 @@ public class Duck extends LivingBeing {
     public Duck(Location loc, Field f) {
         super(loc, f);
     }
+
+    @Override
+    public void act() {
+
+    }
 //    @Override
 //    public String toString()
 //    {

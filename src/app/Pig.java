@@ -11,14 +11,24 @@ package app;
  */
 public class Pig extends LivingBeing
 {
+    Field field;
 
-
-    public Pig(Location location, Field field)
+    public Pig(Location location, Field f)
     {
-        super(location,field);
+        super(location,f);
+        field = f;
         //this.speciesCode = 'Pig';
     }
-    
+
+    @Override
+    public void act() {
+        if(this.getState()== States.Healthy){
+            Location newLocation = field.freeAdjacentLocation(this.getLocation());
+            if(newLocation != null) {
+                setLocation(newLocation);
+            }
+        }
+    }
 //    @Override
 //    public String toString()
 //    {

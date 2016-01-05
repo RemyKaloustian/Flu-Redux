@@ -5,14 +5,17 @@
  */
 package app;
 
+import java.util.Random;
+
 /**
  * @author Rémy Kaloustian
  */
 public abstract class LivingBeing {
     protected char speciesCode;
-    private States state;
+    protected States state;
     private int daysInfected;
     private int daysRecovering;
+    private boolean isInfected;
 
     private  Location location;
     private  Field field;
@@ -25,13 +28,26 @@ public abstract class LivingBeing {
         this.state = States.Healthy;
         this.speciesCode = this.getClass().getSimpleName().charAt(0);
         field = f;
+        this.daysInfected = 0;
         setLocation(loc);
     }
 
 
 
     public void beInfected() {
-        //TODO : Random to know if infected or no
+        Random rand = Randomizer.getRandom();
+        if (rand.nextDouble() >= 0.0){
+            isInfected = true;
+            this.state = States.Sick;
+        }
+    }
+
+    public boolean isInfected() {
+        return isInfected;
+    }
+
+    public void updateDaysInfected(){
+        this.daysInfected++;
     }
 
     public boolean becomeContagious() {
@@ -70,6 +86,10 @@ public abstract class LivingBeing {
             field.clear(location);
         this.location = location;
         field.place(this,location);
+    }
+
+    public  Location getLocation(){
+        return  this.location;
     }
 
     public abstract void act();
