@@ -132,8 +132,19 @@ public class Simulator {
             if (living.getState()==States.DEAD) {
                 it.remove();
             }
+            else if(living.getState() == States.HEALTHY  && simulateWeather() == Weather.RAINY){
+                living.beInfected();
+            }
         }
         updateViews();
+    }
+
+    public Weather simulateWeather(){
+        Random r = new Randomizer().getRandom();
+        if((r.nextDouble()*100)%45 > 1)
+            return Weather.SUNNY;
+        else
+            return  Weather.RAINY;
     }
 
     /**
