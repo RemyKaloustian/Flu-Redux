@@ -5,23 +5,20 @@
  */
 package app;
 
-import java.util.Random;
+import java.util.List;
 
 /**
- *
  * @author Rémy Kaloustian
  * @author GNING Khadim
  */
-public class Human extends LivingBeing
-{
+public class Human extends LivingBeing {
 
     private Field field;
     private boolean vaccinated;
 
 
-    public Human(boolean vac,Location loc,Field f)
-    {
-        super(loc,f);
+    public Human(boolean vac, Location loc, Field f) {
+        super(loc, f);
         field = f;
         vaccinated = vac;
     }
@@ -32,13 +29,30 @@ public class Human extends LivingBeing
 
     @Override
     public void act() {
-        // if(this.getState()== States.Healthy){
-        Location newLocation = field.freeAdjacentLocation(this.getLocation());
-        if(newLocation != null) {
-            field.freeLocation(this.getLocation());
-            setLocation(newLocation);
+        if (this.getState() == States.Healthy) {
+            List<Location> neighborhoods = field.adjacentLocations(getLocation());
+            for (Location loc : neighborhoods) {
+                LivingBeing neighbour = (LivingBeing) field.getObjectAt(loc);
+                if (neighbour != null) {
+                    if (neighbour.isContagious()) {
+                        beInfected();
+                        this.virus = neighbour.getVirus();
+                    }
+                }
+            }
+            Location newLocation = field.freeAdjacentLocation(this.getLocation());
+            if (newLocation != null) {
+                field.freeLocation(this.getLocation());
+                setLocation(newLocation);
+            }
         }
-        //  }
+        if (this.getState() == States.Sick) {
+            updateDaysInfected();
+            becomeContagious();
+            beCured();
+
+        }
+
     }
 
 

@@ -5,23 +5,29 @@
  */
 package app;
 
+import java.util.Random;
+
 /**
- *
  * @author Rémy Kaloustian
  */
-public class Pig extends LivingBeing
-{
-    Field field;
-
-    public Pig(Location location, Field f)
-    {
-        super(location,f);
-        field = f;
-        //this.speciesCode = 'Pig';
+public class Pig extends LivingBeing {
+    public Pig(Location location, Field f) {
+        super(location, f);
+        Random rand = new Random();
+        if (rand.nextDouble() <= 0.80) {
+            this.virus = new H1N1();
+            this.state = States.Sick;
+        }
     }
 
     @Override
     public void act() {
+        if (this.getState() == States.Sick) {
+            updateDaysInfected();
+            becomeContagious();
+            beCured();
+
+        }
 
     }
 //    @Override

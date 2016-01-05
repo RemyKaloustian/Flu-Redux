@@ -5,6 +5,8 @@
  */
 package app;
 
+import java.util.Random;
+
 /**
  *
  * @author Rémy Kaloustian
@@ -14,11 +16,21 @@ public class Chicken extends LivingBeing
     public Chicken(Location location, Field field)
     {
         super(location,field);
-        //this.speciesCode = this.getClass().getSimpleName();
+        Random rand = new Random();
+        if(rand.nextDouble()<=0.80) {
+            this.virus = new H1N1();
+            this.state= States.Sick;
+        }
     }//Chicken()
 
     @Override
     public void act() {
+        if (this.getState() == States.Sick) {
+            updateDaysInfected();
+            becomeContagious();
+            beCured();
+
+        }
 
     }
 

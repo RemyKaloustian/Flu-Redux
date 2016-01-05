@@ -5,6 +5,7 @@
  */
 package app;
 
+
 import java.util.Random;
 
 /**
@@ -13,14 +14,15 @@ import java.util.Random;
 public abstract class LivingBeing {
     protected char speciesCode;
     protected States state;
-    private int daysInfected;
-    private int daysRecovering;
-    private boolean isInfected;
+    protected int daysInfected;
+    protected int daysRecovering;
+    protected boolean contagious;
+    protected Virus virus;
 
-    private  Location location;
-    private  Field field;
+    protected Location location;
+    protected Field field;
 
-    public States getState(){
+    public States getState() {
         return state;
     }
 
@@ -33,29 +35,35 @@ public abstract class LivingBeing {
     }
 
 
-
     public void beInfected() {
         Random rand = Randomizer.getRandom();
-        if (rand.nextDouble() >= 0.99){
-            isInfected = true;
+        if (rand.nextDouble() >= new H1N1().getInfectionRate()) {
             this.state = States.Sick;
+            this.virus = new H1N1();
         }
     }
 
-    public boolean isInfected(){
-        return isInfected;
+    public boolean isInfected() {
+        return state == States.Sick;
     }
 
-    public void updateDaysInfected(){
+    public void updateDaysInfected() {
         this.daysInfected++;
     }
 
-    public boolean becomeContagious() {
-        if (daysInfected >= 2)
-            return true;
-        //TODO : Random pour savoir si contagieux
-        return true;
+    public void becomeContagious() {
+        if (daysInfected >= new H1N1().getInfectionTimeSpan())
+            state = States.Contagious;
+    }
 
+    public void beCured() {
+        if (daysInfected >= new H1N1().getRecoveringTimeSpan()) {
+            Random rand = Randomizer.getRandom();
+            if (rand.nextDouble() >= new H1N1().getMortalityRate())
+                state = States.Dead;
+            else
+                state = States.Healthy;
+        }
     }
 
 
@@ -82,15 +90,23 @@ public abstract class LivingBeing {
     }//toString()
 
     public void setLocation(Location location) {
-        if(location != null)
+        if (location != null)
             field.clear(location);
         this.location = location;
-        field.place(this,location);
+        field.place(this, location);
     }
 
-    public  Location getLocation(){
-        return  this.location;
+    public Location getLocation() {
+        return this.location;
     }
 
     public abstract void act();
+
+    public boolean isContagious() {
+        return contagious;
+    }
+
+    public Virus getVirus() {
+        return virus;
+    }
 }//class LivingBeing

@@ -11,16 +11,32 @@ package app;
  */
 public abstract class Virus 
 {
-    private float infectionRate;
-    private float mortalityRate;
+    private double infectionRate;
+    private double mortalityRate;
     private int infectionTimeSpan;
     private int recoveringTimeSpan;
 
 
-    public Virus(float infectionRate, int recoveringTimeSpan, int infectionTimeSpan, float mortalityRate) {
+    public Virus(double infectionRate, int recoveringTimeSpan, int infectionTimeSpan, double mortalityRate) {
         this.infectionRate = infectionRate;
         this.recoveringTimeSpan = recoveringTimeSpan;
         this.infectionTimeSpan = infectionTimeSpan;
         this.mortalityRate = mortalityRate;
+    }
+
+    public double getInfectionRate() {
+        return infectionRate;
+    }
+
+    public double getMortalityRate() {
+        return mortalityRate;
+    }
+
+    public int getInfectionTimeSpan() {
+        return infectionTimeSpan;
+    }
+
+    public int getRecoveringTimeSpan() {
+        return recoveringTimeSpan;
     }
 }//class Virus
