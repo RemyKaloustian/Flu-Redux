@@ -121,12 +121,18 @@ public abstract class LivingBeing {
         for (Location loc : neighborhoods) {
             LivingBeing neighbour = (LivingBeing) field.getObjectAt(loc);
             if (neighbour != null) {
-                if (neighbour.isContagious()) {
+                if (neighbour.isContagious() && (this.getClass() == neighbour.getClass() || neighbourMayInfect(neighbour))){
                     infect();
                     this.virus = neighbour.getVirus();
                 }
             }
         }
+    }
+
+    public boolean neighbourMayInfect(LivingBeing n){
+        if((this.getClass() == Chicken.class && n.getClass() == Duck.class) ||(this.getClass() == Duck.class && n.getClass() == Chicken.class))
+            return true;
+        return  false;
     }
 
     public Location getLocation() {
