@@ -10,15 +10,25 @@ package app;
  */
 public abstract class LivingBeing {
     protected char speciesCode;
-    States state;
+    private States state;
     private int daysInfected;
     private int daysRecovering;
 
+    private  Location location;
+    private  Field field;
 
-    public LivingBeing() {
+    public States getState(){
+        return state;
+    }
+
+    public LivingBeing(Location loc, Field f) {
         this.state = States.Healthy;
         this.speciesCode = this.getClass().getSimpleName().charAt(0);
+        field = f;
+        setLocation(loc);
     }
+
+
 
     public void beInfected() {
         //TODO : Random to know if infected or no
@@ -32,26 +42,35 @@ public abstract class LivingBeing {
 
     }
 
+
     public String toString() {
         String toReturn = "";
 
         if (this.state.equals(States.Healthy))
-            toReturn += Simulation.ANSI_GREEN + "H";
+            toReturn += "H";
 
         else if (this.state.equals(States.Sick))
-            toReturn += Simulation.ANSI_PURPLE + "S";
+            toReturn += "S";
 
         else if (this.state.equals(States.Recovering))
-            toReturn += Simulation.ANSI_BLUE + "R";
+            toReturn += "R";
 
         else if (this.state.equals(States.Contagious))
-            toReturn += Simulation.ANSI_YELLOW + "C";
+            toReturn += "C";
 
         else if (this.state.equals(States.Dead))
-            toReturn += Simulation.ANSI_RED + "D";
+            toReturn += "D";
 
 
-        return toReturn + "_" + this.speciesCode + Simulation.ANSI_RESET;
+        return toReturn + "_" + this.speciesCode;
     }//toString()
 
+    public void setLocation(Location location) {
+        if(location != null)
+            field.clear(location);
+        this.location = location;
+        field.place(this,location);
+    }
+
+    public abstract void act();
 }//class LivingBeing

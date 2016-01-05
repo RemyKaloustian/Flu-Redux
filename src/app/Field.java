@@ -1,4 +1,4 @@
-package app.view.foxesandrabbits.v2;
+package app;
 
 import java.util.Collections;
 import java.util.LinkedList;

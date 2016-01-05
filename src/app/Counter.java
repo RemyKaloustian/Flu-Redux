@@ -1,4 +1,4 @@
-package app.view.foxesandrabbits.v1;
+package app;
 
 import java.awt.Color;
 

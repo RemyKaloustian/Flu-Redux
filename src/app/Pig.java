@@ -11,8 +11,11 @@ package app;
  */
 public class Pig extends LivingBeing
 {
-    public Pig()
+
+
+    public Pig(Location location, Field field)
     {
+        super(location,field);
         //this.speciesCode = 'Pig';
     }
     

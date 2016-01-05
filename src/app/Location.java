@@ -1,4 +1,4 @@
-package app.view.graphs;
+package app;
 
 /**
  * Represent a location in a rectangular grid.

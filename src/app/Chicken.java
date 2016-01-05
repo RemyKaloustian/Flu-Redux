@@ -11,8 +11,9 @@ package app;
  */
 public class Chicken extends LivingBeing
 {
-    public Chicken()
+    public Chicken(Location location, Field field)
     {
+        super(location,field);
         //this.speciesCode = this.getClass().getSimpleName();
     }//Chicken()
    

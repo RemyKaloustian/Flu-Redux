@@ -6,15 +6,12 @@
 package app;
 
 /**
- *
  * @author Rémy Kaloustian
  */
-public class Duck extends LivingBeing
-{
-    
-    public Duck()
-    {
-        //this.speciesCode = 'D';
+public class Duck extends LivingBeing {
+
+    public Duck(Location loc, Field f) {
+        super(loc, f);
     }
 //    @Override
 //    public String toString()

@@ -11,11 +11,21 @@ package app;
  */
 public class Human extends LivingBeing
 {
-    
-    public Human()
+
+
+    private boolean vaccinated;
+
+    public Human(boolean vac,Location loc,Field f)
     {
-        //this.speciesCode = 'H';
+        super(loc,f);
+        vaccinated = vac;
     }
+
+    public boolean isvaccinated() {
+        return vaccinated;
+    }
+
+
 //    @Override
 //    public String toString()
 //    {

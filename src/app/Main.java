@@ -5,9 +5,6 @@
  */
 package app;
 
-import app.view.graphs.GridView;
-
-
 /**
  *
  * @author Rémy Kaloustian
@@ -20,10 +17,8 @@ public class Main
     {
 
         //TODO: Appel futur de la vue.
-        Simulation simu = new Simulation();
-        
-        GridView view = new GridView(5,3);
-        
+        Simulator simu = new Simulator();
+        simu.simulate(20);
     }//main()
     
 }//class Main

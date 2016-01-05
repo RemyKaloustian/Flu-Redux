@@ -1,4 +1,4 @@
-package app.view.graphs;
+package app;
 
 import java.util.Random;
 

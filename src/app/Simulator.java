@@ -1,4 +1,4 @@
-package app.view.foxesandrabbits.v2;
+package app;
 
 import java.util.Random;
 import java.util.List;
@@ -8,8 +8,8 @@ import java.awt.Color;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field containing
- * rabbits and foxes.
- * 
+ * humans and chickens.
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
@@ -20,14 +20,22 @@ public class Simulator {
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
     // The probability that a human will be created in any given grid position.
-    private static final double HUMAN_CREATION_PROBABILITY = 0.02;
+    private static final double HUMAN_CREATION_PROBABILITY = 0.50;
+    // The probability that a chicken will be created in any given grid position.
+    private static final double CHICKEN_CREATION_PROBABILITY = 0.10;
     // The probability that a pig will be created in any given grid position.
-    private static final double PIG_CREATION_PROBABILITY = 0.08;
-    //The probability that a duck will be created in any given grid position
-    private static final double DUCK_CREATION_PROBABILITY = 0.03;
+    private static final double PIG_CREATION_PROBABILITY = 0.20;
+    // The probability that a duck will be created in any given grid position.
+    private static final double DUCK_CREATION_PROBABILITY = 0.10;
 
-    // List of animals in the field.
-    private List<Animal> animals;
+    // Lists of animals in the field. Separate lists are kept for ease of
+    // iteration.
+    private List<Human> humans;
+    private List<LivingBeing> livings;
+
+    private List<Chicken> chickens;
+    private List<Pig> pigs;
+    private List<Duck> ducks;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -44,7 +52,7 @@ public class Simulator {
 
     /**
      * Create a simulation field with the given size.
-     * 
+     *
      * @param depth
      *            Depth of the field. Must be greater than zero.
      * @param width
@@ -58,13 +66,19 @@ public class Simulator {
             width = DEFAULT_WIDTH;
         }
 
-        animals = new ArrayList<>();
+        humans = new ArrayList<>();
+        livings = new ArrayList<>();
+        chickens = new ArrayList<>();
+        pigs=new ArrayList<>();
+        ducks=new ArrayList<>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Rabbit.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.BLUE);
+        view.setColor(Human.class, Color.ORANGE);
+        view.setColor(Duck.class, Color.BLUE);
+        view.setColor(Pig.class, Color.PINK);
+        view.setColor(Chicken.class, Color.YELLOW);
 
         // Setup a valid starting point.
         reset();
@@ -81,7 +95,7 @@ public class Simulator {
     /**
      * Run the simulation from its current state for the given number of steps.
      * Stop before the given number of steps if it ceases to be viable.
-     * 
+     *
      * @param numSteps
      *            The number of steps to run for.
      */
@@ -98,19 +112,17 @@ public class Simulator {
     public void simulateOneStep() {
         step++;
 
-        // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<>();
-        // Let all rabbits act.
-        for (Iterator<Animal> it = animals.iterator(); it.hasNext();) {
-            Animal animal = it.next();
-            animal.act(newAnimals);
-            if (!animal.isAlive()) {
+
+        // Provide space for newborn humans.
+        for (Iterator<LivingBeing> it = livings.iterator(); it.hasNext();) {
+            LivingBeing living = it.next();
+            living.act();
+            if (living.getState().name().equalsIgnoreCase("Dead")) {
                 it.remove();
             }
         }
 
-        // Add the newly born foxes and rabbits to the main lists.
-        animals.addAll(newAnimals);
+
 
         view.showStatus(step, field);
     }
@@ -120,7 +132,8 @@ public class Simulator {
      */
     public void reset() {
         step = 0;
-        animals.clear();
+        humans.clear();
+        chickens.clear();
         populate();
 
         // Show the starting state in the view.
@@ -128,21 +141,31 @@ public class Simulator {
     }
 
     /**
-     * Randomly populate the field with foxes and rabbits.
+     * Randomly populate the field with chickens and humans.
      */
     private void populate() {
         Random rand = Randomizer.getRandom();
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                if (rand.nextDouble() <= HUMAN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
-                } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+                    Human human = new Human(false,location,field);
+                    humans.add(human);
+                } else if (rand.nextDouble() <= DUCK_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
+                    Duck duck = new Duck(location,field);
+                    ducks.add(duck);
+                }
+                else if (rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Chicken chicken = new Chicken(location,field);
+                    chickens.add(chicken);
+                }
+                else if (rand.nextDouble() <= PIG_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Pig pig = new Pig(location,field);
+                    pigs.add(pig);
                 }
                 // else leave the location empty.
             }
