@@ -100,7 +100,23 @@ public class Field
     {
         return field[row][col];
     }
-    
+
+    /**
+     * Remove the animal at the given location, if any.
+     * @param location Where in the field.
+     */
+    public void freeLocation(Location location)
+    {
+        freeLocation(location.getRow(), location.getCol());
+    }
+
+    /**
+     * Remove the animal at the given location, if any.
+     * @param row The desired row.
+     * @param col The desired column.
+     */
+    public void freeLocation(int row, int col){field[row][col] = null;}
+
     /**
      * Generate a random location that is adjacent to the
      * given location, or is the same location.

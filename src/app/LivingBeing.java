@@ -36,13 +36,13 @@ public abstract class LivingBeing {
 
     public void beInfected() {
         Random rand = Randomizer.getRandom();
-        if (rand.nextDouble() >= 0.0){
+        if (rand.nextDouble() >= 0.99){
             isInfected = true;
             this.state = States.Sick;
         }
     }
 
-    public boolean isInfected() {
+    public boolean isInfected(){
         return isInfected;
     }
 

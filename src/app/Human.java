@@ -18,6 +18,7 @@ public class Human extends LivingBeing
     private Field field;
     private boolean vaccinated;
 
+
     public Human(boolean vac,Location loc,Field f)
     {
         super(loc,f);
@@ -31,7 +32,13 @@ public class Human extends LivingBeing
 
     @Override
     public void act() {
-
+        // if(this.getState()== States.Healthy){
+        Location newLocation = field.freeAdjacentLocation(this.getLocation());
+        if(newLocation != null) {
+            field.freeLocation(this.getLocation());
+            setLocation(newLocation);
+        }
+        //  }
     }
 
 

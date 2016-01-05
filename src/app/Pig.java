@@ -22,12 +22,7 @@ public class Pig extends LivingBeing
 
     @Override
     public void act() {
-       // if(this.getState()== States.Healthy){
-            Location newLocation = field.freeAdjacentLocation(this.getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-      //  }
+
     }
 //    @Override
 //    public String toString()
