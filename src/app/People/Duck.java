@@ -47,4 +47,10 @@ public class Duck extends LivingBeing {
         }
     }
 
+    private void infect() {
+        Random rand = new Random();
+        if (rand.nextDouble() >= 0.80) {
+            beInfected();
+        }
+    }
 }//class Duck

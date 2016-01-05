@@ -45,4 +45,11 @@ public class Pig extends LivingBeing {
                 setDead();
         }
     }
-}//class Pig
+
+    private void infect() {
+        Random rand = new Random();
+        if (rand.nextDouble() >= 0.60) {
+            beInfected();
+        }
+    }
+        }//class Pig

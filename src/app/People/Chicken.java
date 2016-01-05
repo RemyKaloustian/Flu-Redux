@@ -50,5 +50,12 @@ public class Chicken extends LivingBeing
         }
     }
 
+    private void infect(){
+        Random rand = new Random();
+        if(rand.nextDouble()>=0.70) {
+            beInfected();
+        }
+    }
+
 
 }//class Chicken

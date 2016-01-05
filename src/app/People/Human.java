@@ -69,7 +69,7 @@ public class Human extends LivingBeing {
     }
 
     private void infect(){
-        if(isvaccinated()){
+        if(!isvaccinated()){
             Random rand = new Random();
             if(rand.nextDouble()>=0.50) {
                 beInfected();

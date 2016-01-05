@@ -2,7 +2,7 @@ package app.view;
 
 import app.People.*;
 
-import javax.management.timer.TimerMBean;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -109,9 +109,7 @@ public class Simulator {
             Timer timer = new Timer(speed, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
                         simulateOneStep();
-
                 }
             });
             timer.start();
@@ -141,7 +139,7 @@ public class Simulator {
 
     public Weather simulateWeather(){
         Random r = new Randomizer().getRandom();
-        if((r.nextDouble()*100)%45 > 1)
+        if((r.nextDouble()*100)%45 <= 1)
             return Weather.SUNNY;
         else
             return  Weather.RAINY;
