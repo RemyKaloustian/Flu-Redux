@@ -18,6 +18,7 @@ import java.util.Random;
 
 /**
  * @author Rémy Kaloustian
+ * @author GNING Khadim
  */
 public abstract class LivingBeing {
     protected char speciesCode;

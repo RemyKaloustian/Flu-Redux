@@ -19,7 +19,6 @@ public class Main
     {
         //TODO: Appel futur de la vue.
         new HomeView();
-        //simu.simulate(20);
     }//main()
     
 }//class Main
