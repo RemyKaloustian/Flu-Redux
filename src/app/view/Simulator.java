@@ -2,7 +2,11 @@ package app.view;
 
 import app.People.*;
 
+import javax.management.timer.TimerMBean;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -91,7 +95,7 @@ public class Simulator {
      * (4000 steps).
      */
     public void runLongSimulation() {
-        simulate(4000);
+        simulate(4000, 100, 8);
     }
 
     /**
@@ -100,13 +104,17 @@ public class Simulator {
      *
      * @param numSteps The number of steps to run for.
      */
-    public void simulate(int numSteps) {
-        for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
-            simulateOneStep();
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-            }
+    public void simulate(int numSteps, int speed, int neighbors) {
+        for (step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
+            Timer timer = new Timer(speed, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                        simulateOneStep();
+
+                }
+            });
+            timer.start();
         }
     }
 
