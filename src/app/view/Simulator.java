@@ -131,7 +131,7 @@ public class Simulator {
                 it.remove();
             }
             else if(living.getState() == States.HEALTHY  && simulateWeather() == Weather.RAINY){
-                living.beInfected();
+                living.infect();
             }
         }
         updateViews();

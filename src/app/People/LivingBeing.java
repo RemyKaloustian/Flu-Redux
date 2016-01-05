@@ -13,6 +13,7 @@ import app.viruses.Virus;
 import app.view.Field;
 import app.view.Location;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -115,11 +116,26 @@ public abstract class LivingBeing {
         }
     }
 
+    public void neighbourContagious(){
+        List<Location> neighborhoods = field.adjacentLocations(getLocation());
+        for (Location loc : neighborhoods) {
+            LivingBeing neighbour = (LivingBeing) field.getObjectAt(loc);
+            if (neighbour != null) {
+                if (neighbour.isContagious()) {
+                    infect();
+                    this.virus = neighbour.getVirus();
+                }
+            }
+        }
+    }
+
     public Location getLocation() {
         return this.location;
     }
 
     public abstract void act();
+
+    public  abstract  void infect();
 
     public boolean isContagious() {
         return contagious;

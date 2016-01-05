@@ -33,7 +33,10 @@ public class Chicken extends LivingBeing
 
     @Override
     public void act() {
-        if (this.getState() == States.SICK) {
+        if (this.getState() == States.HEALTHY) {
+            neighbourContagious();
+        }
+        else if (this.getState() == States.SICK) {
             updateDaysInfected();
             becomeContagious();
             beCured();
@@ -50,11 +53,8 @@ public class Chicken extends LivingBeing
         }
     }
 
-    private void infect(){
-        Random rand = new Random();
-        if(rand.nextDouble()>=0.70) {
-            beInfected();
-        }
+    public void infect(){
+        beInfected();
     }
 
 

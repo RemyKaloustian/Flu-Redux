@@ -30,13 +30,14 @@ public class Duck extends LivingBeing {
 
     @Override
     public void act() {
-        if (this.getState() == States.SICK) {
+        if (this.getState() == States.HEALTHY) {
+            neighbourContagious();
+        }
+        else if (this.getState() == States.SICK) {
             updateDaysInfected();
             becomeContagious();
             beCured();
-
         }
-
     }
 
     public void beCured() {
@@ -47,10 +48,7 @@ public class Duck extends LivingBeing {
         }
     }
 
-    private void infect() {
-        Random rand = new Random();
-        if (rand.nextDouble() >= 0.80) {
-            beInfected();
-        }
+    public void infect() {
+        beInfected();
     }
 }//class Duck

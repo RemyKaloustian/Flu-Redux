@@ -55,21 +55,8 @@ public class Human extends LivingBeing {
         }
     }
 
-    private void neighbourContagious(){
-        List<Location> neighborhoods = field.adjacentLocations(getLocation());
-        for (Location loc : neighborhoods) {
-            LivingBeing neighbour = (LivingBeing) field.getObjectAt(loc);
-            if (neighbour != null) {
-                if (neighbour.isContagious()) {
-                    infect();
-                    this.virus = neighbour.getVirus();
-                }
-            }
-        }
-    }
-
-    private void infect(){
-        if(!isvaccinated()){
+    public void infect(){
+        if(isvaccinated()){
             Random rand = new Random();
             if(rand.nextDouble()>=0.50) {
                 beInfected();
