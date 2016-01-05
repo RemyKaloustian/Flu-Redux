@@ -24,10 +24,8 @@ public class Field {
     /**
      * Represent a field of the given dimensions.
      *
-     * @param depth
-     *            The depth of the field.
-     * @param width
-     *            The width of the field.
+     * @param depth The depth of the field.
+     * @param width The width of the field.
      */
     public Field(int depth, int width) {
         this.depth = depth;
@@ -49,8 +47,7 @@ public class Field {
     /**
      * Clear the given location.
      *
-     * @param location
-     *            The location to clear.
+     * @param location The location to clear.
      */
     public void clear(Location location) {
         field[location.getRow()][location.getCol()] = null;
@@ -60,12 +57,9 @@ public class Field {
      * Place an animal at the given location. If there is already an animal at
      * the location it will be lost.
      *
-     * @param animal
-     *            The animal to be placed.
-     * @param row
-     *            Row coordinate of the location.
-     * @param col
-     *            Column coordinate of the location.
+     * @param animal The animal to be placed.
+     * @param row    Row coordinate of the location.
+     * @param col    Column coordinate of the location.
      */
     public void place(Object animal, int row, int col) {
         place(animal, new Location(row, col));
@@ -75,10 +69,8 @@ public class Field {
      * Place an animal at the given location. If there is already an animal at
      * the location it will be lost.
      *
-     * @param animal
-     *            The animal to be placed.
-     * @param location
-     *            Where to place the animal.
+     * @param animal   The animal to be placed.
+     * @param location Where to place the animal.
      */
     public void place(Object animal, Location location) {
         field[location.getRow()][location.getCol()] = animal;
@@ -87,8 +79,7 @@ public class Field {
     /**
      * Return the animal at the given location, if any.
      *
-     * @param location
-     *            Where in the field.
+     * @param location Where in the field.
      * @return The animal at the given location, or null if there is none.
      */
     public Object getObjectAt(Location location) {
@@ -98,10 +89,8 @@ public class Field {
     /**
      * Return the animal at the given location, if any.
      *
-     * @param row
-     *            The desired row.
-     * @param col
-     *            The desired column.
+     * @param row The desired row.
+     * @param col The desired column.
      * @return The animal at the given location, or null if there is none.
      */
     public Object getObjectAt(int row, int col) {
@@ -113,8 +102,7 @@ public class Field {
      * the same location. The returned location will be within the valid bounds
      * of the field.
      *
-     * @param location
-     *            The location from which to generate an adjacency.
+     * @param location The location from which to generate an adjacency.
      * @return A valid location within the grid area.
      */
     public Location randomAdjacentLocation(Location location) {
@@ -125,8 +113,7 @@ public class Field {
     /**
      * Get a shuffled list of the free adjacent locations.
      *
-     * @param location
-     *            Get locations adjacent to this.
+     * @param location Get locations adjacent to this.
      * @return A list of free adjacent locations.
      */
     public List<Location> getFreeAdjacentLocations(Location location) {
@@ -145,8 +132,7 @@ public class Field {
      * there is none, return null. The returned location will be within the
      * valid bounds of the field.
      *
-     * @param location
-     *            The location from which to generate an adjacency.
+     * @param location The location from which to generate an adjacency.
      * @return A valid location within the grid area.
      */
     public Location freeAdjacentLocation(Location location) {
@@ -164,8 +150,7 @@ public class Field {
      * will not include the location itself. All locations will lie within the
      * grid.
      *
-     * @param location
-     *            The location from which to generate adjacencies.
+     * @param location The location from which to generate adjacencies.
      * @return A list of locations adjacent to that given.
      */
     public List<Location> adjacentLocations(Location location) {
@@ -192,6 +177,28 @@ public class Field {
             // Shuffle the list. Several other methods rely on the list
             // being in a random order.
             Collections.shuffle(locations, rand);
+        }
+        return locations;
+    }
+
+    public List<Location> adjacentFourLocations(Location location) {
+        assert location != null : "Null location passed to adjacentLocation";
+        List<Location> locations = new LinkedList<>();
+        if (location != null) {
+            int row = location.getRow();
+            int col = location.getCol();
+            for (int i = -1; i <= 1; i = i + 2) {
+                int nextRow = row + i;
+                if (nextRow >= 0 && nextRow < depth) {
+                    locations.add(new Location(nextRow, col));
+                }
+            }
+            for (int i = -1; i <= 1; i = i + 2) {
+                int nextCol = col + i;
+                if (nextCol >= 0 && nextCol < width) {
+                    locations.add(new Location(row, nextCol));
+                }
+            }
         }
         return locations;
     }

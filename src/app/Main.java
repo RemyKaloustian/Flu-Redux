@@ -18,8 +18,7 @@ public class Main
     public static void main(String args[])
     {
         //TODO: Appel futur de la vue.
-        Simulator simu = new Simulator();
-        HomeView home = new HomeView(simu);
+        new HomeView();
         //simu.simulate(20);
     }//main()
     

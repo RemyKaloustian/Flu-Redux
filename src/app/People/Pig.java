@@ -17,11 +17,11 @@ import java.util.Random;
  * @author Rémy Kaloustian
  */
 public class Pig extends LivingBeing {
-    public Pig(Location location, Field f) {
-        super(location, f);
+    public Pig(Location location, Field f, int neigh) {
+        super(location, f, neigh);
         Random rand = new Random();
         //Probability to be sick in the beggining
-        if(rand.nextDouble()<=0.50) {
+        if (rand.nextDouble() <= 0.50) {
             this.virus = new H1N1();
             this.state = States.SICK;
         }
@@ -40,6 +40,7 @@ public class Pig extends LivingBeing {
 
     }
 
+    @Override
     public void beCured() {
         if (daysInfected >= new H1N1().getRecoveringTimeSpan()) {
             Random rand = Randomizer.getRandom();

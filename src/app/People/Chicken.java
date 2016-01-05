@@ -20,9 +20,9 @@ import java.util.Random;
  */
 public class Chicken extends LivingBeing
 {
-    public Chicken(Location location, Field field)
+    public Chicken(Location location, Field field,int neigh)
     {
-        super(location,field);
+        super(location,field,neigh);
         Random rand = new Random();
         //Probability to be sick in the beggining
         if(rand.nextDouble()<=0.50) {
@@ -45,6 +45,7 @@ public class Chicken extends LivingBeing
 
     }
 
+    @Override
     public void beCured() {
         if (daysInfected >= new H1N1().getRecoveringTimeSpan()) {
             Random rand = Randomizer.getRandom();

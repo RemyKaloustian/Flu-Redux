@@ -29,16 +29,18 @@ public abstract class LivingBeing {
 
     protected Location location;
     protected Field field;
+    protected int neighbourhood;
 
     public States getState() {
         return state;
     }
 
-    public LivingBeing(Location loc, Field f) {
+    public LivingBeing(Location loc, Field f,int neigh) {
         this.state = States.HEALTHY;
         this.speciesCode = this.getClass().getSimpleName().charAt(0);
         field = f;
         this.daysInfected = 0;
+        neighbourhood = neigh;
         setLocation(loc);
     }
 

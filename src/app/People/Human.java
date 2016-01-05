@@ -22,10 +22,14 @@ public class Human extends LivingBeing {
     private boolean vaccinated;
 
 
-    public Human(boolean vac, Location loc, Field f) {
-        super(loc, f);
+    public Human(Location loc, Field f,int neigh) {
+        super(loc, f,neigh);
         field = f;
-        vaccinated = vac;
+        Random rand = new Random();
+        if (rand.nextDouble() >= 0.70) {
+            vaccinated = true;
+        } else
+            vaccinated = false;
     }
 
     public boolean isvaccinated() {
@@ -54,6 +58,7 @@ public class Human extends LivingBeing {
             setLocation(newLocation);
         }
     }
+
 
     public void infect(){
         if(isvaccinated()){

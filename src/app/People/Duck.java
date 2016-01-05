@@ -18,15 +18,15 @@ import java.util.Random;
  */
 public class Duck extends LivingBeing {
 
-    public Duck(Location loc, Field f) {
-        super(loc, f);
+    public Duck(Location loc, Field f, int neigh) {
+        super(loc, f, neigh);
         Random rand = new Random();
         //Probability to be sick in the beggining
-        if(rand.nextDouble()<=0.50) {
+        if (rand.nextDouble() <= 0.50) {
             this.virus = new H1N1();
-            this.state= States.SICK;
+            this.state = States.SICK;
         }
-}
+    }
 
     @Override
     public void act() {
@@ -40,6 +40,7 @@ public class Duck extends LivingBeing {
         }
     }
 
+    @Override
     public void beCured() {
         if (daysInfected >= new H1N1().getRecoveringTimeSpan()) {
             Random rand = Randomizer.getRandom();
